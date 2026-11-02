@@ -2,7 +2,14 @@ const express = require("express");
 const app = express();
 const web_files = express.static("public");
 
-//Changes must go here
+const logRequest = function(req, res, next){
+   res.type("html");
+   res.write('<p id="output"> Request: ' + req.method + " for " + req.path + "</p>");
+   next();
+};
+
+app.use(web_files);
+app.use(log_request);
 
 app.get("/hello", function(req, res) {
    res.end("<h1>Hello, Express!</h1>");
